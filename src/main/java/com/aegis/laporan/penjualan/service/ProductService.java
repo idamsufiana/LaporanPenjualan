@@ -43,8 +43,12 @@ public class ProductService {
         }
     }
 
-    public Product update(Product entity, ProductDto dto) throws Throwable {
+    public Product update(UUID id, ProductDto dto) throws Throwable {
         try {
+            Product entity = new Product();
+            if(get(id).isPresent()){
+                entity = 
+            }
             BeanUtils.copyProperties(dto, entity);
             entity.setUpdatedDate(new Date());
             return productRepository.save(entity);

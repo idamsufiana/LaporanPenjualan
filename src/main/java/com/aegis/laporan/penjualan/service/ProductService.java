@@ -61,12 +61,13 @@ public class ProductService {
         }
     }
 
-    public void delete(UUID id) throws Throwable {
+    public Product delete(UUID id) throws Throwable {
         try {
             Product entity = new Product();
             if(get(id).isPresent()) {
                 entity = productRepository.findById(id).get();
                 productRepository.delete(entity);
+                return entity;
             }else {
                 throw new AegisException("data not found");
             }

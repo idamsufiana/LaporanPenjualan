@@ -30,17 +30,17 @@ public class ProductController extends BaseController{
 
     @PostMapping("/update/{id}")
     public Object Update(@PathVariable UUID id, @RequestBody ProductDto dto) throws Throwable {
-        Optional<Product> product = productService.update(id);
-        if(product.isPresent()){
-            return success(productService.get(id).get());
-        }else {
-            throw new AegisException("no data found");
-        }
+        return success(productService.update(id, dto));
 
     }
 
     @PostMapping("/add")
     public Object add(@RequestBody ProductDto dto) throws Throwable {
         return success(productService.createFromDto(dto));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public Object add(@PathVariable UUID id) throws Throwable {
+        return success(productService.delete(id));
     }
 }

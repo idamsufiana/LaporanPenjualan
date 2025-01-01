@@ -15,7 +15,7 @@ public class RegisterRequest {
     @Email(message = "Invalid email format")
     private String email;
     @NotBlank(message = "Phone number is mandatory")
-    @Pattern(regexp = "\\+?\\d{10,15}", message = "Invalid phone number format")
+    @Pattern(regexp = "\\+628\\d{8,12}", message = "Invalid phone number format")
     private String phone;
     private String role;
 }

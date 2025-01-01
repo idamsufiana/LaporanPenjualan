@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1/Transactions")
+@RequestMapping("/v1/Purchase")
 public class PurchaseController {
 
 

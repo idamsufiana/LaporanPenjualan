@@ -36,7 +36,6 @@ public class JpaConfig {
         properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
         properties.put("hibernate.physical_naming_strategy", env.getProperty("spring.jpa.hibernate.naming-strategy"));
-
         properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
 
         return builder

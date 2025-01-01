@@ -15,6 +15,7 @@ public class User extends CrudEntity{
     private String Password;
     private String phone;
     private String email;
+    private Boolean status;
     @ManyToOne
     private Role role;
 }

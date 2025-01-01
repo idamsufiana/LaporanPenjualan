@@ -27,9 +27,6 @@ public class JpaConfig {
     @Autowired
     private Environment env;
 
-    @Value("${app.datasource.type}")
-    private String dbType;
-
     @Bean(name = "appEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean appEntityManagerFactory(final EntityManagerFactoryBuilder builder,
                                                                           final @Qualifier("app-datasource") DataSource dataSource) {

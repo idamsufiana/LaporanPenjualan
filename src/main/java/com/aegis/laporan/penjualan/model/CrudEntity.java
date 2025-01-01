@@ -21,7 +21,13 @@ public abstract class CrudEntity implements Serializable {
     protected Date updatedDate;
     protected String createdBy;
     protected String updatedBy;
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
+    public UUID getId() {
+        return this.id;
+    }
     public Date getCreatedDate() {
         return this.createdDate;
     }

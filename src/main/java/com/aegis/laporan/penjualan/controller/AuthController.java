@@ -9,22 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
+@RequestMapping("/v1/Auth")
 public class AuthController {
 
-    @PostMapping
-    public Object login(@RequestBody LoginRequest loginRequest){
-        return new Object();
-    }
-
-    @PostMapping
-    public Object register(@RequestBody @Valid RegisterRequest registerRequest){
-        return new Object();
-    }
-
-    @PostMapping
-    public Object changePassword(@RequestBody String username){
-        return new Object();
-    }
 
 }

@@ -21,6 +21,9 @@ public class BaseController {
     public ResponseEntity<Object> success() {
         return new ResponseEntity(new CommonRs(HttpStatus.OK.value(), "success"), HttpStatus.OK);
     }
+    public ResponseEntity<Object> error(HttpStatus httpStatus, Object message) {
+        return new ResponseEntity<>(new CommonRs(httpStatus.value(), "error", message), httpStatus);
+    }
     public ResponseEntity<Resource> okDownload(String filename, String mediaType, byte[] data) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=\"" + filename + "\"");

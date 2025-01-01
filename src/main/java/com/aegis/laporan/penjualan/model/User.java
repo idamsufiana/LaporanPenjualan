@@ -11,8 +11,8 @@ import lombok.Setter;
 @Setter
 @Table(name = "user")
 public class User extends CrudEntity{
-    private String UserName;
-    private String Password;
+    private String userName;
+    private String password;
     private String phone;
     private String email;
     private Boolean status;

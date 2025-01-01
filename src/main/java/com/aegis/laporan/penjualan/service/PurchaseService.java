@@ -41,6 +41,6 @@ public class PurchaseService {
     }
 
     public List<Purchase> getReportByDateRange(LocalDate startDate, LocalDate endDate) {
-        return purchaseRepository.findByDateBetween(startDate, endDate);
+        return purchaseRepository.findByTransactionDateBetween(startDate, endDate);
     }
 }

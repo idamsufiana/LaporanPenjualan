@@ -9,6 +9,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -36,5 +38,9 @@ public class PurchaseService {
         purchase.setQuantity(quantity);
         return purchaseRepository.save(purchase);
 
+    }
+
+    public List<Purchase> getReportByDateRange(LocalDate startDate, LocalDate endDate) {
+        return purchaseRepository.findByDateBetween(startDate, endDate);
     }
 }

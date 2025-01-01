@@ -20,7 +20,7 @@ public class PurchaseController extends BaseController{
     PurchaseService purchaseService;
 
     @Secured({ApplicationEnum.Group.Kasir, ApplicationEnum.Group.Admin})
-    @PostMapping("/update/{id}")
+    @PostMapping("/add")
     public Object Purchase(@RequestBody PurchaseRequest data) throws Throwable {
         return success(purchaseService.createPurchase(data.getId(), data.getQuatity()));
     }

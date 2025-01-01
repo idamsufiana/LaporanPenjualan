@@ -1,4 +1,4 @@
-package com.aegis.laporan.penjualan.model.request;
+package com.aegis.laporan.penjualan.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

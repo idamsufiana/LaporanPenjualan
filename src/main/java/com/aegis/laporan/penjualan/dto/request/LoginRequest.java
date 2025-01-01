@@ -1,4 +1,4 @@
-package com.aegis.laporan.penjualan.model.request;
+package com.aegis.laporan.penjualan.dto.request;
 
 public class LoginRequest {
     private String UserName;

@@ -15,17 +15,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/Report")
-public class ReportController {
+public class ReportController extends BaseController{
 
     @Autowired
     PurchaseService purchaseService;
 
     @GetMapping("/transaction")
-    public ResponseEntity<List<Purchase>> getLaporan(
+    public ResponseEntity<Object> getLaporan(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         List<Purchase> laporan = purchaseService.getReportByDateRange(startDate, endDate);
-        return ResponseEntity.ok(laporan);
+        return success(laporan);
     }
 
 

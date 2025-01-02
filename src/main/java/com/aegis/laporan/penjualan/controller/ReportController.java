@@ -2,9 +2,12 @@ package com.aegis.laporan.penjualan.controller;
 
 import com.aegis.laporan.penjualan.constant.ApplicationEnum;
 import com.aegis.laporan.penjualan.constant.Secured;
+import com.aegis.laporan.penjualan.exception.AegisException;
 import com.aegis.laporan.penjualan.model.Purchase;
 import com.aegis.laporan.penjualan.service.PurchaseService;
+import com.aegis.laporan.penjualan.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +25,17 @@ public class ReportController extends BaseController{
     @Autowired
     PurchaseService purchaseService;
 
+    @Autowired
+    ReportService reportService;
+
     @Secured({ApplicationEnum.Group.Kasir, ApplicationEnum.Group.Admin})
     @GetMapping("/transaction")
-    public ResponseEntity<Object> getLaporan(
+    public ResponseEntity<Resource> getLaporan(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-        List<Purchase> laporan = purchaseService.getReportByDateRange(startDate, endDate);
-        return success(laporan);
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) throws AegisException {
+        List<Purchase> laporan = reportService.getReportByDateRange(startDate, endDate);
+        return okDownload("report.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                reportService.exportBulk(laporan));
     }
 
 

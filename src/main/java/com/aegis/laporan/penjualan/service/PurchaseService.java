@@ -40,6 +40,21 @@ public class PurchaseService {
 
     }
 
+    @Transactional
+    public Purchase refund(UUID productId, Integer quantity) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+
+        product.setStock(product.getStock() + quantity);
+        productRepository.save(product);
+
+        Purchase purchase = new Purchase();
+        purchase.setProduct(product);
+        purchase.setQuantity(quantity);
+        return purchaseRepository.save(purchase);
+
+    }
+
     public List<Purchase> getReportByDateRange(LocalDate startDate, LocalDate endDate) {
         return purchaseRepository.findByTransactionDateBetween(startDate, endDate);
     }

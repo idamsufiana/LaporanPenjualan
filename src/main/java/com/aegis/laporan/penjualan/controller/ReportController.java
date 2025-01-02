@@ -1,5 +1,7 @@
 package com.aegis.laporan.penjualan.controller;
 
+import com.aegis.laporan.penjualan.constant.ApplicationEnum;
+import com.aegis.laporan.penjualan.constant.Secured;
 import com.aegis.laporan.penjualan.model.Purchase;
 import com.aegis.laporan.penjualan.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ public class ReportController extends BaseController{
     @Autowired
     PurchaseService purchaseService;
 
+    @Secured({ApplicationEnum.Group.Kasir, ApplicationEnum.Group.Admin})
     @GetMapping("/transaction")
     public ResponseEntity<Object> getLaporan(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,

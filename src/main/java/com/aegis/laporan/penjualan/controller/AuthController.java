@@ -1,5 +1,7 @@
 package com.aegis.laporan.penjualan.controller;
 
+import com.aegis.laporan.penjualan.constant.ApplicationEnum;
+import com.aegis.laporan.penjualan.constant.Secured;
 import com.aegis.laporan.penjualan.dto.request.LoginRequest;
 import com.aegis.laporan.penjualan.dto.request.RegisterRequest;
 import com.aegis.laporan.penjualan.dto.response.LoginResponse;
@@ -10,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/Auth")
@@ -43,6 +42,13 @@ public class AuthController extends BaseController{
         } catch (Exception e) {
             return this.error(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
+    }
+
+    @Secured({ApplicationEnum.Group.Admin})
+    @PutMapping("/activate/{userId}")
+    public ResponseEntity<User> activateUser(@PathVariable String userName) {
+        User user = authService.activateUser(userName);
+        return ResponseEntity.ok(user);
     }
 
 

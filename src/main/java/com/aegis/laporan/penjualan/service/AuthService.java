@@ -10,6 +10,7 @@ import com.aegis.laporan.penjualan.support.BcryptWrapper;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.security.auth.message.AuthException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -57,10 +59,25 @@ public class AuthService {
 
     public LoginResponse login(LoginRequest loginRequest) throws AuthException, ReflectionException {
 
+
         User userLogin = new User();
         LoginResponse loginResponse = userLogin != null ? createToken(userLogin) : null;
         User user = userRepository.findFirstByUserName(loginRequest.getUserName());
+        if (!user.getStatus()) {
+            throw new IllegalStateException("Account is not activated");
+        }
         return loginResponse;
+    }
+
+    public User activateUser(String name) {
+        User user = new User();
+        if (userRepository.findFirstByUserName(name) != null) {
+            user = userRepository.findFirstByUserName(name);
+        } else{
+            throw new EntityNotFoundException("User not found");
+        }
+        user.setStatus(true);
+        return userRepository.save(user);
     }
 
     public LoginResponse createToken(User user) {

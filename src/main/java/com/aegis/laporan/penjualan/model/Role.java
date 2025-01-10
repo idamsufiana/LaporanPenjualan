@@ -1,5 +1,6 @@
 package com.aegis.laporan.penjualan.model;
 
+import com.aegis.laporan.penjualan.constant.ApplicationEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -10,6 +11,6 @@ import lombok.Setter;
 @Setter
 @Table(name = "role")
 public class Role extends CrudEntity{
-    private String role;
+    private ApplicationEnum.Group role;
     private String description;
 }

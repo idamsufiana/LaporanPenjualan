@@ -6,6 +6,10 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -17,5 +21,6 @@ public class User extends CrudEntity{
     private String email;
     private Boolean status= false;
     @ManyToOne
-    private Role role;
+    private Set<Role> roles = new HashSet<>();
+
 }

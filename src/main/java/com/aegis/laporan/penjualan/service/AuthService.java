@@ -58,14 +58,12 @@ public class AuthService {
     }
 
     public LoginResponse login(LoginRequest loginRequest) throws AuthException, ReflectionException {
-
-
         User userLogin = new User();
-        LoginResponse loginResponse = userLogin != null ? createToken(userLogin) : null;
         User user = userRepository.findFirstByUserName(loginRequest.getUserName());
         if (!user.getStatus()) {
             throw new IllegalStateException("Account is not activated");
         }
+        LoginResponse loginResponse = userLogin != null ? createToken(userLogin) : null;
         return loginResponse;
     }
 
@@ -83,13 +81,13 @@ public class AuthService {
     public LoginResponse createToken(User user) {
 
         Map<String, Object> tokenPayload = setPayloadToken(user);
-        return new LoginResponse(createToken(tokenPayload, AuthService.tokenType.AUTH_TOKEN), createToken(tokenPayload, AuthService.tokenType.REFRESH_TOKEN));
+        return new LoginResponse(createToken(tokenPayload, AuthService.tokenType.AUTH_TOKEN));
     }
 
     public Map<String, Object> setPayloadToken(User userModel) {
         Map<String, Object> tokenPayload = new HashMap();
         tokenPayload.put("userName", userModel.getUserName());
-        tokenPayload.put("role", userModel.getRole().getRole());
+        tokenPayload.put("role", userModel.getRoles());
         return tokenPayload;
     }
 

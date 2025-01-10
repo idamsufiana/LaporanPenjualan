@@ -1,15 +1,14 @@
 package com.aegis.laporan.penjualan.controller;
 
 import com.aegis.laporan.penjualan.common.CommonRs;
+import com.aegis.laporan.penjualan.dto.response.LoginResponse;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.util.ObjectUtils;
 
 public class BaseController {
@@ -28,6 +27,10 @@ public class BaseController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=\"" + filename + "\"");
         return ResponseEntity.ok().headers(headers).contentLength(data.length).contentType(MediaType.parseMediaType(mediaType)).body(new ByteArrayResource(data));
+    }
+
+    public ResponseEntity<Object> okLogin(ResponseCookie jwtCookie, LoginResponse data) {
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(data);
     }
 
     public Pageable pageFromRequest(int page, int size, String sort, Boolean asc) {

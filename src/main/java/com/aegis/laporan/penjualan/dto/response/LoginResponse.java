@@ -1,12 +1,15 @@
 package com.aegis.laporan.penjualan.dto.response;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class LoginResponse {
 
     private String Authtoken;
-    private String RefreshToken;
 
-    public LoginResponse(String Authtoken, String RefreshToken) {
+    public LoginResponse(String Authtoken) {
         this.Authtoken = Authtoken;
-        this.RefreshToken = RefreshToken;
     }
 }

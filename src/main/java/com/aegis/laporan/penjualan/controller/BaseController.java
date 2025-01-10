@@ -29,8 +29,8 @@ public class BaseController {
         return ResponseEntity.ok().headers(headers).contentLength(data.length).contentType(MediaType.parseMediaType(mediaType)).body(new ByteArrayResource(data));
     }
 
-    public ResponseEntity<Object> okLogin(ResponseCookie jwtCookie, LoginResponse data) {
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(data);
+    public ResponseEntity<Object> okLogin(ResponseCookie jwtCookie) {
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body("Success");
     }
 
     public Pageable pageFromRequest(int page, int size, String sort, Boolean asc) {

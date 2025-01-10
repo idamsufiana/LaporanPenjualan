@@ -1,7 +1,5 @@
 package com.aegis.laporan.penjualan.controller;
 
-import com.aegis.laporan.penjualan.constant.ApplicationEnum;
-import com.aegis.laporan.penjualan.constant.Secured;
 import com.aegis.laporan.penjualan.exception.AegisException;
 import com.aegis.laporan.penjualan.model.Purchase;
 import com.aegis.laporan.penjualan.service.PurchaseService;
@@ -10,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +27,7 @@ public class ReportController extends BaseController{
     @Autowired
     ReportService reportService;
 
-    @Secured({ApplicationEnum.Group.Kasir, ApplicationEnum.Group.Admin})
+    @PreAuthorize("hasRole('KASIR','ADMIN')")
     @GetMapping("/transaction")
     public ResponseEntity<Resource> getLaporan(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
